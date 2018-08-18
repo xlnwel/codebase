@@ -19,3 +19,8 @@ def get_embed(input_data, vocab_size, embed_dim):
     embed = tf.nn.embedding_lookup(embedding, input_data)
     return embed
 
+
+# kaiming initializer
+kaiming_initializer = tf.variance_scaling_initializer(scale=1/np.sqrt(2))
+# xavier initializer
+xavier_initializer = tf.variance_scaling_initializer()
