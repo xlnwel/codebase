@@ -21,6 +21,8 @@ def get_embed(input_data, vocab_size, embed_dim):
     embed = tf.nn.embedding_lookup(embedding, input_data)
     return embed
 
+def tf_zip(x, y):
+    return tf.stack([x, y], axis=1)
 
 # kaiming initializer
 def kaiming_initializer(uniform=False, seed=None, dtype=tf.float32):
