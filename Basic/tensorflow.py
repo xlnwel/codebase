@@ -7,6 +7,13 @@ tensor.shape.as_list()
 # to rename a tensor
 logits = tf.identity(logits, name='logits')
 
+def get_tensor(sess, name=None, op_name=None):
+    if name is None and op_name is None:
+        raise ValueError
+    elif name:
+        return sess.graph.get_tensor_by_name(name)
+    else:
+        return sess.graph.get_tensor_by_name(op_name + ':0')
 
 # to build embedding table
 def get_embed(input_data, vocab_size, embed_dim):
