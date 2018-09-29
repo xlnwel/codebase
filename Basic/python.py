@@ -9,6 +9,13 @@ class DLProgress(tqdm):
 
 def download(url, file):
     if not isfile(file):
+        # load urlretrieve for specific python version
+        if sys.version_info[0] == 2:
+            from urllib import urlretrieve
+        else:
+            from urllib.request import urlretrieve
+
+        # download the file
         with DLProgress(unit='B', unit_scale=True, miniters=1, desc='CIFAR-10 Dataset') as pbar:
             urlretrieve(
                 url,
