@@ -1,4 +1,4 @@
-# to plot image samples one next another, in a figureu
+# to plot image samples one next another, in a figure
 def view_samples(epoch, samples, nrows, ncols, figsize=(5,5)):
     fig, axes = plt.subplots(figsize=figsize, nrows=nrows, ncols=ncols, 
                              sharey=True, sharex=True)
