@@ -18,7 +18,7 @@ def dim(feature_map, z, batch_size=None, log_tensorboard=False):
     return local_MI
 
 def _score(feature_map, z, batch_size=None):
-    with tf.name_scope('discriminator'):
+    with tf.variable_scope('discriminator'):
         T_joint = _get_score(feature_map, z, batch_size)
         T_prod = _get_score(feature_map, z, batch_size, shuffle=True)
 
@@ -29,7 +29,7 @@ def _score(feature_map, z, batch_size=None):
     return E_joint, E_prod
 
 def _get_score(feature_map, z, batch_size=None, shuffle=False):
-    with tf.name_scope('score'):
+    with tf.variable_scope('score'):
         height, width, channels = feature_map.shape.as_list()[1:]
         z_channels = z.shape.as_list()[-1]
 
