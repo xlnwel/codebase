@@ -53,3 +53,19 @@ def add_gradients_to_tensorboard(name_scope):
     grad_var_pairs = list(zip(grads, ['conv2d/kernel', 'conv2d_3/kernel', 'conv2d_6/kernel']))
     for grad, var in grad_var_pairs:
         tf.summary.histogram(var, grad)
+
+def _variable_on_cpu(name, shape, initializer, dtype=tf.float32, cpu='/cpu:0'):
+    """Helper to create a Variable stored on CPU memory.
+
+    Args:
+      name: name of the variable
+      shape: list of ints
+      initializer: initializer for Variable
+
+    Returns:
+      Variable Tensor
+    """
+    with tf.device(cpu):
+        var = tf.get_variable(
+            name, shape, initializer=initializer, dtype=dtype)
+    return var
