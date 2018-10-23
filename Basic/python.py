@@ -60,3 +60,7 @@ def timeit(func, name=None):
 
 	return result
     
+# read .wav file
+rate, s = wavfile.read('**.wav')
+# play audio
+IPython.display.Audio(s, rate=rate) # rate is the digital frequency
