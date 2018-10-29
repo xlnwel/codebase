@@ -57,17 +57,39 @@ def range_normalization(images, normalizing=True):
 
     return processed_images
 
+def log_normal(sample, mu, logsigma):
+    """ Compute a Gaussian distribution density with mean mu and standard deviation exp(logsigma)
+    
+    Arguments:
+        sample: x
+        mu: mean
+        logsigma: log of the standard deviation
+    """
+    log2pi = tf.constant([np.log(2 * np.pi)])           # log(2pi)
+    inverse_sigma = tf.exp(-logsigma)                   # 1/sigma
+    tmp = (sample - mu) * inverse_sigma                 # (x - mu)/sigma
+    
+    return -0.5 * (tmp**2 + 2 * logsigma + log2pi)      # log(N(x; mu, sigma**2))
+
 def logsumexp(value, axis=None, keepdims=False):
+    """ Compute the log of the sum of the exp of value
+    
+    Arguments:
+    	value: tensor for which we compute logsumexp
+    	axis: axis along which we apply sum
+    	keepdims: if true, retains reduced dimensions with length 1. 
+    """
     if axis is not None:
         max_value = tf.reduce_max(value, axis=axis, keepdims=True)
-        value0 = value - max_value    # for numerical stability
-        if keepdims is False:
+        value = value - max_value    # for numerical stability
+        if keepdims == False:
             max_value = tf.squeeze(max_value)
-        return max_value + tf.log(tf.reduce_sum(tf.exp(value0),
-                                                axis=axis, keepdims=keepdims))
     else:
         max_value = tf.reduce_max(value)
-        return max_value + tf.log(tf.reduce_sum(tf.exp(value - max_value)))
+        value = value - max_value
+        
+    return max_value + tf.log(tf.reduce_sum(tf.exp(value),
+                                            axis=axis, keepdims=keepdims))
 
 def get_tensor(sess, name=None, op_name=None):
     if name is None and op_name is None:
