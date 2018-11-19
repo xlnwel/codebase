@@ -61,3 +61,8 @@ boxplot(grad_data2$GradRate~grad_data2$College)
 
 # apply a function to a dataframe
 sapply(dataframe, sd) # compute the standard deviation for each column in dataframe
+
+# label data in scatterplot and draw legend
+plot(h$height, h$weight, xlab='Height (inches)', ylab='Weight (lbs)', col='blue')
+points(h$height[h$gender==1], h$weight[h$gender==1], col='red')
+legend(55, 220, pch = 1, col = c('red', 'blue'), legend = c('females', 'males'))
