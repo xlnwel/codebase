@@ -6,9 +6,9 @@ v=c(1:10)
 v[-2]
 
 # uniform distribution
-x=runif(10)
+x <- runif(10)
 # norm distribution
-y=rnorm(10)
+y <- rnorm(10)
 
 # plot 2 plots in a figure
 par(mfrow=c(2,1))
@@ -31,7 +31,7 @@ search()       # return a list of objects and attached packages
 
 # clear the environment
 rm(list=ls())
-# cleare plots
+# clear plots
 graphics.off()
 dev.off()
 # clear the console
@@ -39,11 +39,11 @@ cat("\014")
 
 
 # create a table of the counts at each combination of factor levels
-t = table(df$var)
+t <- table(df$var)
 # express table entries as fraction of marginal table 
-prop = prop.table(t)
+prop <- prop.table(t)
 # round the values
-pf = round(prop, 1)
+pf <- round(prop, 1)
 # concatenate vectors after converting to character
 paste(1:12, c('st', 'nd', 'rd', rep('th', 9)), sep="")
 
